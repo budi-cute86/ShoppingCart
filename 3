@@ -1,0 +1,46 @@
+# Online Shop
+
+class Product
+  attr_reader :name, :price
+
+  def initialize(name, price)
+    @name = name
+    @price = price
+  end
+end
+
+class ShoppingCart
+  def initialize
+    @items = []
+  end
+
+  def add_item(product)
+    @items << product
+  end
+
+  def total_price
+    @items.reduce(0) { |sum, product| sum + product.price }
+  end
+
+  def print_receipt
+    puts '==== Receipt ===='
+    @items.each do |product|
+      puts "#{product.name}: $#{product.price}"
+    end
+    puts '-----------------'
+    puts "Total: $#{total_price}"
+  end
+end
+
+# Пример использования
+cart = ShoppingCart.new
+
+product1 = Product.new('Phone', 699)
+product2 = Product.new('Laptop', 1499)
+product3 = Product.new('Headphones', 99)
+
+cart.add_item(product1)
+cart.add_item(product2)
+cart.add_item(product3)
+
+cart.print_receipt
